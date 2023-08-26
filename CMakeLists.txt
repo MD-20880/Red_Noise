@@ -38,7 +38,11 @@ add_executable(RedNoise
         libs/sdw/Utils.cpp
         src/RedNoise.cpp
         src/utils.cpp
-        src/renderer.cpp)
+        src/renderer.cpp
+        src/camera.cpp
+        src/scene.cpp
+        src/shader.cpp
+        src/raytrace.cpp)
 
 if (MSVC)
     target_compile_options(RedNoise
@@ -64,6 +68,7 @@ else ()
         -Wno-ignored-attributes)
 
     set(DEBUG_OPTIONS -O2 -fno-omit-frame-pointer -g)
+
     set(RELEASE_OPTIONS -O3 -march=native -mtune=native)
     target_link_libraries(RedNoise PUBLIC $<$<CONFIG:Debug>:-Wl,-lasan>)
 
