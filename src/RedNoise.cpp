@@ -16,10 +16,12 @@
 
 
 
-size_t mode = 0x05;
+size_t mode = 0x03;
 bool doRotation = false;
 /* 0x01  Blank    */
 /* 0x02  WireFrame*/
+/* 0x03 */
+/* 0x04 */
 
 void draw(DrawingWindow &window) {
 	window.clearPixels();
@@ -164,8 +166,8 @@ void handleEvent(SDL_Event event, DrawingWindow &window, Render::Renderer &rende
 		else if(event.key.keysym.sym == SDLK_LEFT)cameras->rotate(ROTATE_Y(-0.1));
 
 		/*Move Code*/
-		else if(event.key.keysym.sym == SDLK_w)cameras->setPosition(cameras->campos_+(glm::vec3(0,0,-0.1)*cameras->camrot_));
-		else if(event.key.keysym.sym == SDLK_s)cameras->setPosition(cameras->campos_+(glm::vec3(0,0,0.1)*cameras->camrot_));
+		else if(event.key.keysym.sym == SDLK_w)cameras->setPosition(cameras->campos_+(glm::vec3(0,-0.1,0)*cameras->camrot_));
+		else if(event.key.keysym.sym == SDLK_s)cameras->setPosition(cameras->campos_+(glm::vec3(0,0.1,0)*cameras->camrot_));
 		else if(event.key.keysym.sym == SDLK_d)cameras->setPosition(cameras->campos_+(glm::vec3(0.1,0,0)*cameras->camrot_));
 		else if(event.key.keysym.sym == SDLK_a)cameras->setPosition(cameras->campos_+(glm::vec3(-0.1,0,0)*cameras->camrot_));
 		
@@ -180,9 +182,10 @@ int main(int argc, char *argv[]) {
 	SDL_Event event;
 	Render::Renderer renderer(&window,HEIGHT,WIDTH);
 	Camera::BasicCamera camera1(&renderer);
+	camera1.setPosition(glm::vec3(0,0,4));
 	Scene::BasicScene scene1("../src/cornell-box.obj","../src/cornell-box.mtl",0.35);
 	Scene::BasicScene scene2("../src/ball.obj","../src/cornell-box.mtl",0.35);
-	camera1.setPosition(glm::vec3(0.000000, 0.800000, 2.200002));
+	// camera1.setPosition(glm::vec3(0.000000, 0.800000, 2.200002));
 	while (true) {
 		// We MUST poll for events - otherwise the window will freeze !
 		if (window.pollForInputEvents(event)) handleEvent(event, window,renderer,&camera1);
@@ -194,7 +197,7 @@ int main(int argc, char *argv[]) {
 		}
 		else if(mode == 0x03){
 			renderer.clearPixelBuffer();
-			// camera1.setPosition(glm::vec3(0.000000, 0.0,4));
+			camera1.setPosition(glm::vec3(camera1.campos_));
 			void (*render)(Scene::BasicScene*,Camera::BasicCamera*) = Shader::RasterizeShader;
 			camera1.render(scene1, render);
 		}else if(mode == 0x04){

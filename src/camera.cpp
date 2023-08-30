@@ -31,6 +31,7 @@ namespace Camera{
 
         void BasicCamera::setPosition(glm::vec3 position){
             campos_ = position;
+            printf("Position: %f %f %f\n",campos_.x,campos_.y,campos_.z);
         }
 
 }

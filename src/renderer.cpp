@@ -175,7 +175,7 @@ void Renderer::drawFilledTriangle(CanvasTriangle triangle, Colour colour){
 
 		for (int x = round(startx); x<round(endx); x++){
 			if (!(x >= width_ || x < 0 || y >= height_ || y < 0)){
-				glm::vec3 barycord = Utils::GetBarycentricCoord(v0,v1,v2,CanvasPoint(round(x),round(y)));
+				glm::vec3 barycord = Utils::GetBarycentricCoord(v0,v1,v2,CanvasPoint(x,y));
 				if (barycord.x >= 0 && barycord.x <= 1 && barycord.y >= 0 && barycord.y <= 1 && barycord.z >= 0 && barycord.z <= 1){
 					// float depth = 1/(barycord*glm::mat3x3(v0.x,v0.y,v0.depth,v1.x,v1.y,v1.depth,v2.x,v2.y,v2.depth)).z;
 					float depth = 1.0/(barycord*glm::mat3x3(v0.x,v1.x,v2.x,v0.y,v1.y,v2.y,v0.depth,v1.depth,v2.depth)).z;

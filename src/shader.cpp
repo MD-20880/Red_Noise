@@ -14,8 +14,8 @@ namespace Shader
         // glm::vec3 newPoint = glm::inverse(camrot) * glm::vec3(point.x - campos.x,point.y-campos.y,point.z-campos.z);
         glm::vec3 newPoint = glm::inverse(camera->camrot_) * glm::vec3(camera->campos_.x - point.x,camera->campos_.y-point.y,camera->campos_.z-point.z);
 
-        float x = camera->focal_ * ((newPoint.x)/(newPoint.z))*(-(float(height)*2.0/3.0)) +float(width)/2;
-        float y = camera->focal_ * ((newPoint.y)/(newPoint.z))*(-(float(height)*2.0/3.0)) +float(width)/2;
+        float x = camera->focal_ * ((newPoint.x)/(newPoint.z))*(-(height*2.0/3.0)) +width/2;
+        float y = camera->focal_ * ((newPoint.y)/(newPoint.z))*(-(height*2.0/3.0)) +height/2;
         // printf("DBG:%f,%f POINT:%f,%f,%f\n",x,y,point.x,point.y,point.z);
         // return CanvasPoint(round(x),round(y),glm::length(camrot*glm::vec3(0,0,-1)*newPoint));
         return CanvasPoint(round(x),round(y),newPoint.z);

@@ -60,9 +60,9 @@ namespace Utils{
 		}
 
 		int i1, i2, i3;
-		i1 = std::stoi(line[1])-1;
-		i2 = std::stoi(line[2])-1;
-		i3 = std::stoi(line[3])-1;
+		i1 = std::stoi(line[1])-0.1;
+		i2 = std::stoi(line[2])-0.1;
+		i3 = std::stoi(line[3])-0.1;
 
 
 		return ModelTriangle(vertices[i1],vertices[i2],vertices[i3],mtl);
